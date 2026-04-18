@@ -48,7 +48,7 @@ function Dashboard() {
         <div className=" flex flex-wrap items-center justify-center gap-10 ">
           {tasks.length === 0 && <p>No tasks yet. Create your first task!</p>}
           {tasks.map((task) => (
-            <div key={task.id} className="task-card border  w-[20vw] p-5">
+            <div key={task.id} className="task-card border  lg:w-[20vw] w-[100%] p-5">
               <h3 className="text-2xl mb-2">{task.title}</h3>
               <p className="italic">{task.description}</p>
               <small className="mb-6 block">Due: {task.date}</small>

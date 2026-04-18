@@ -1,20 +1,39 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../Services/authService";
+import axios from "axios";
 
-function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+const SignUp = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
-      navigate("/");
-    } catch (err) {
-      setError("Invalid username or password");
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/signup/",
+        formData,
+      );
+      console.log("Success", response.data);
+      alert("SignUp SuccessFull");
+      alert("Now You Can Login");
+
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Error : ", error.response.data);
+      alert("SignUp Failed : " + JSON.stringify(error.response.data));
     }
   };
 
@@ -28,7 +47,6 @@ function Login() {
         className="bg-white shadow-lg rounded px-8 pt-10 pb-10 flex flex-col"
         onSubmit={handleSubmit}
       >
-        {error && <div className="error">{error}</div>}
         <div className="mb-6">
           {/* <label className="block text-gray-700 font-bold text-md  mb-4">
             Username
@@ -36,13 +54,27 @@ function Login() {
           <input
             type="text"
             placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={formData.username}
+            name="username"
+            onChange={handleChange}
             className="mb-2  shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
             required
           />
         </div>
-
+        <div className="mb-6">
+          {/* <label className="block text-gray-700 font-bold text-md  mb-4">
+            Username
+          </label> */}
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            name="email"
+            onChange={handleChange}
+            className="mb-2  shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
+            required
+          />
+        </div>
         <div className="mb-6">
           {/* <label className="text-gray-700 font-bold block text-md mb-4">
             Password
@@ -50,8 +82,9 @@ function Login() {
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            name="password"
+            onChange={handleChange}
             className="mb-2 shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
             required
           />
@@ -63,17 +96,17 @@ function Login() {
           className="bg-blue-400 hover:bg-blue-500 text-white font-bold transition px-6 py-2 w-full active:scale-95 transition-all"
           type="submit"
         >
-          Login
+          SignUp
         </button>
         <div className="flex items-center p-3 justify-between">
-          <span className="text-sm">Dont Have An Account ?</span>
-          <a href="/signup" className="font-bold text-sm underline">
-            Signup
+          <span className="text-sm">Already Have An Account ?</span>
+          <a href="/login" className="font-bold text-sm underline">
+            Login
           </a>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default Login;
+export default SignUp;

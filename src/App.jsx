@@ -14,6 +14,7 @@ import AddStatus from "./Pages/AddStatus";
 import Priority from "./Pages/Priority";
 import AddPriority from "./Pages/AddPriority";
 import AddTask from "./Pages/AddTask";
+import SignUp from "./Pages/SignUp";
 
 function PrivateRoutes({ children }) {
   const authenticated = IsAuthenticated();
@@ -28,6 +29,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="login/" element={<Login />} />
+        <Route path="signup/" element={<SignUp />} />
         <Route
           path="/"
           element={
