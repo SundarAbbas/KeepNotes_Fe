@@ -19,7 +19,7 @@ import SignUp from "./Pages/SignUp";
 function PrivateRoutes({ children }) {
   const authenticated = IsAuthenticated();
   if (!authenticated) {
-    return <Navigate to="login/" replace />;
+    return <Navigate to="/login" replace />;
   }
   return children;
 }
@@ -28,8 +28,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="login/" element={<Login />} />
-        <Route path="signup/" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route
           path="/"
           element={
@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path="statuses/"
+          path="/statuses"
           element={
             <PrivateRoutes>
               <Status />
@@ -47,7 +47,7 @@ function App() {
           }
         />
         <Route
-          path="addStatus/"
+          path="/addStatus"
           element={
             <PrivateRoutes>
               <AddStatus />
@@ -55,7 +55,7 @@ function App() {
           }
         />
         <Route
-          path="priorities/"
+          path="/priorities"
           element={
             <PrivateRoutes>
               <Priority />
@@ -63,7 +63,7 @@ function App() {
           }
         />
         <Route
-          path="addPriority/"
+          path="/addPriority"
           element={
             <PrivateRoutes>
               <AddPriority />
@@ -71,7 +71,7 @@ function App() {
           }
         />
         <Route
-          path="addTasks/"
+          path="/addTasks"
           element={
             <PrivateRoutes>
               <AddTask />
