@@ -29,7 +29,7 @@ function Dashboard() {
     }
   };
 
-  if (loading) return <div>Loading tasks...</div>;
+  // if (loading) return <div>Loading tasks...</div>;
 
   return (
     <Sidebar>

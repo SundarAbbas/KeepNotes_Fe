@@ -7,6 +7,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,92 +18,105 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/signup/",
         formData,
       );
-      console.log("Success", response.data);
-      alert("SignUp SuccessFull");
-      alert("Now You Can Login");
-
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-      });
+      alert("Success! You can now login.");
+      setFormData({ username: "", email: "", password: "" });
     } catch (error) {
-      console.error("Error : ", error.response.data);
-      alert("SignUp Failed : " + JSON.stringify(error.response.data));
+      console.error("Error:", error.response?.data);
+      alert("Registration failed. Please check your details.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-container bg-black flex justify-center flex-col items-center h-screen ">
-      <h2 className="text-white text-5xl font-extrabold tracking-tight mb-10">
-        Keep <span className="text-blue-500">Notes</span>{" "}
-      </h2>
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-4">
+      {/* Brand Header */}
+      <div className="mb-8 text-center">
+        <h2 className="text-4xl font-extrabold text-slate-800 tracking-tight">
+          Keep <span className="text-blue-600">Notes</span>
+        </h2>
+        <p className="text-slate-500 mt-2">
+          Create your account to get started
+        </p>
+      </div>
 
+      {/* Form Card */}
       <form
-        className="bg-white shadow-lg rounded px-8 pt-10 pb-10 flex flex-col"
+        className="bg-white border border-slate-200 shadow-xl shadow-blue-100/50 w-full max-w-md rounded-2xl p-8 transition-all"
         onSubmit={handleSubmit}
       >
-        <div className="mb-6">
-          {/* <label className="block text-gray-700 font-bold text-md  mb-4">
-            Username
-          </label> */}
-          <input
-            type="text"
-            placeholder="Username"
-            value={formData.username}
-            name="username"
-            onChange={handleChange}
-            className="mb-2  shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
-            required
-          />
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">
+              Username
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your username"
+              value={formData.username}
+              name="username"
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-700"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">
+              Email Address
+            </label>
+            <input
+              type="email"
+              placeholder="name@example.com"
+              value={formData.email}
+              name="email"
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-700"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={formData.password}
+              name="password"
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-700"
+              required
+            />
+          </div>
+
+          <button
+            disabled={loading}
+            className={`w-full py-3 rounded-xl text-white font-bold text-lg shadow-lg transition-all active:scale-[0.98] 
+              ${loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"}`}
+            type="submit"
+          >
+            {loading ? "Creating Account..." : "Sign Up"}
+          </button>
         </div>
-        <div className="mb-6">
-          {/* <label className="block text-gray-700 font-bold text-md  mb-4">
-            Username
-          </label> */}
-          <input
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            name="email"
-            onChange={handleChange}
-            className="mb-2  shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
-            required
-          />
-        </div>
-        <div className="mb-6">
-          {/* <label className="text-gray-700 font-bold block text-md mb-4">
-            Password
-          </label> */}
-          <input
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-            className="mb-2 shadow appearance-none border border-gray-400  rounded w-full py-2 px-7 text-gray-700 leading-tight focus:ring-2 "
-            required
-          />
-          {/* <p className="italic text-red-500 text-sm">
-            Please Enter Your Password
-          </p> */}
-        </div>
-        <button
-          className="bg-blue-400 hover:bg-blue-500 text-white font-bold transition px-6 py-2 w-full active:scale-95 transition-all"
-          type="submit"
-        >
-          SignUp
-        </button>
-        <div className="flex items-center p-3 justify-between">
-          <span className="text-sm">Already Have An Account ?</span>
-          <a href="/login" className="font-bold text-sm underline">
-            Login
-          </a>
+
+        <div className="mt-8 pt-6 border-t border-slate-100 justify-between">
+          <p className="text-slate-600 text-sm">
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="text-blue-600 font-bold hover:underline"
+            >
+              Log in
+            </a>
+          </p>
         </div>
       </form>
     </div>

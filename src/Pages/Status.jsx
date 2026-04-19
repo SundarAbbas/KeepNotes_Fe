@@ -27,7 +27,7 @@ const Status = () => {
       loadStatuses();
     }
   };
-  if (loading) return <div>Loading Statuses</div>;
+  // if (loading) return <div>Loading Statuses</div>;
 
   return (
     <Sidebar>
