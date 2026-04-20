@@ -9,6 +9,7 @@ import {
   Info,
   Flag,
   Star,
+  ListTodo,
 } from "lucide-react";
 import { logout } from "../Services/authService";
 import { useNavigate } from "react-router-dom";
@@ -37,11 +38,12 @@ const Sidebar = ({ children }) => {
   //   Navitems
   const navItems = [
     { name: "Dashboard", path: "/", icon: Home },
-    { name: "Add Tasks", path: "/addTasks", icon: Plus },
-    { name: "All Statuses", path: "/statuses", icon: Info },
-    { name: "Add Status", path: "/addStatus", icon: Plus },
-    { name: "All Priorites", path: "/priorities", icon: Star },
-    { name: "Add Priority", path: "/addPriority", icon: Plus },
+    // { name: "My Tasks", path: "/tasks", icon: ListTodo },
+    // { name: "Add Tasks", path: "/addTasks", icon: Plus },
+    { name: "Categories", path: "/statuses", icon: Info },
+    // { name: "Add Status", path: "/addStatus", icon: Plus },
+    { name: "Priorites", path: "/priorities", icon: Star },
+    // { name: "Add Priority", path: "/addPriority", icon: Plus },
   ];
   return (
     <div className="flex h-screen overflow-hidden bg-gray-700">

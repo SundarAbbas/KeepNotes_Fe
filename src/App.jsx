@@ -15,6 +15,7 @@ import Priority from "./Pages/Priority";
 import AddPriority from "./Pages/AddPriority";
 import AddTask from "./Pages/AddTask";
 import SignUp from "./Pages/SignUp";
+import Tasks from "./Pages/Tasks";
 
 function PrivateRoutes({ children }) {
   const authenticated = IsAuthenticated();
@@ -75,6 +76,14 @@ function App() {
           element={
             <PrivateRoutes>
               <AddTask />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <PrivateRoutes>
+              <Tasks />
             </PrivateRoutes>
           }
         />
