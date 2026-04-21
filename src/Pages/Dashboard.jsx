@@ -47,7 +47,7 @@ function Dashboard() {
     await loadTasks(); // Refresh the task list
   };
 
-  if (loading) return <div className="text-center mt-10">Loading tasks...</div>;
+  // if (loading) return <div className="text-center mt-10">Loading tasks...</div>;
 
   return (
     <>
@@ -55,20 +55,20 @@ function Dashboard() {
         <div className="dashboard">
           <div className="header flex items-center justify-center">
             <h1 className="text-4xl text-black font-extrabold text-center mb-10 flex items-center ">
-              All Tasks
-              <NavLink to="/addTasks" className="text-sm bg-blue-600 text-white ms-4 px-3 py-2 rounded-xl">Add New Task</NavLink>
+              Welcome back  {localStorage.getItem("user")} !
+              {/* <NavLink to="/addTasks" className="font-semibold text-sm bg-blue-600 text-white ms-4 px-3 py-2 rounded-xl">Add New Task</NavLink> */}
             </h1>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-10">
             {tasks.length === 0 && <p>No tasks yet. Create your first task!</p>}
-            {tasks.map((task) => (
+            {tasks.filter(task => task.priority_name === "Extreme").slice(0,2).map((task) => (
               <div
                 key={task.id}
                 className="task-card border rounded-lg lg:w-[20vw] w-[100%] p-5 shadow-md hover:shadow-lg transition-shadow"
               >
-                <h3 className="text-2xl mb-2 font-semibold">{task.title}</h3>
-                <p className="text-gray-600 mb-2">{task.description}</p>
+                <h3 className="text-2xl mb-2 font-semibold">{task.title.slice(0,30)}</h3>
+                <p className="text-gray-600 mb-2">{task.description.slice(0,200)}</p>
                 <div className="mb-2">
                   <span className="font-semibold">Status: </span>
                   <span

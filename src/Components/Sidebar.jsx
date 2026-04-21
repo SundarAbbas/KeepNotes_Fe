@@ -38,7 +38,7 @@ const Sidebar = ({ children }) => {
   //   Navitems
   const navItems = [
     { name: "Dashboard", path: "/", icon: Home },
-    // { name: "My Tasks", path: "/tasks", icon: ListTodo },
+    { name: "My Tasks", path: "/tasks", icon: ListTodo },
     // { name: "Add Tasks", path: "/addTasks", icon: Plus },
     { name: "Categories", path: "/statuses", icon: Info },
     // { name: "Add Status", path: "/addStatus", icon: Plus },
