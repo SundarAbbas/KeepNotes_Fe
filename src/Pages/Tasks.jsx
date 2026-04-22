@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Menu } from "@headlessui/react";
 import {
   getTasks,
   createTask,
@@ -7,7 +8,17 @@ import {
 } from "../Services/taskService";
 import Sidebar from "../Components/Sidebar";
 import UpdateStatusModal from "../Components/UpdateStatusModal";
-import { Trash, Edit2, Eye, X, Plus } from "lucide-react";
+import {
+  Trash,
+  Edit2,
+  Eye,
+  X,
+  Plus,
+  ActivityIcon,
+  Dot,
+  List,
+  Circle,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 function Tasks() {
@@ -60,7 +71,7 @@ function Tasks() {
       <Sidebar>
         <div className="dashboard">
           <div className="flex flex-wrap items-start justify-start gap-10">
-            <div className="flex flex-wrap items-center border-1 rounded-xl border-gray-400 p-10 justify-center gap-5 w-[100%] lg:w-[50%]">
+            <div className="flex flex-wrap items-center border-1 rounded-xl border-gray-400 p-6 justify-center gap-5 w-[100%] lg:w-[50%]">
               <div className="w-full flex items-center justify-between">
                 <h1 className="border-b-2  border-blue-500 text-lg text-black font-extrabold text-center  flex items-center ">
                   My Tasks
@@ -81,35 +92,125 @@ function Tasks() {
                 .map((task) => (
                   <div
                     key={task.id}
-                    className={`task-card border rounded-lg  border-gray-400 lg:w-[100%]  w-[100%] p-5 shadow-md hover:shadow-lg transition-shadow ${detailedTask?.id === task.id ? "bg-gray-100  " : ""}`}
+                    className={`task-card border rounded-lg  border-gray-400 lg:w-[100%]  w-[100%] p-5 shadow-md hover:shadow-lg transition-shadow ${detailedTask?.id === task.id ? "bg-gray-50  " : ""}`}
                     onClick={() => setDetailedTask(task)}
                   >
-                    <h3 className="text-2xl mb-2 font-semibold">
+                    <div className="mb-6 flex justify-between items-center">
+                      <Circle
+                        className={` ${
+                          task.status_name === "Completed"
+                            ? "text-green-800"
+                            : task.status_name === "In Progress"
+                              ? " text-yellow-400"
+                              : " text-red-500"
+                        }`}
+                      />
+                      <Menu
+                        as="div"
+                        className="relative inline-block text-left "
+                      >
+                        <Menu.Button className="text-black">
+                          {" "}
+                          <List />{" "}
+                        </Menu.Button>
+
+                        <Menu.Items className="absolute  mx-auto right-0 mt-2 w-15 bg-white rounded border border-gray-400 shadow-lg z-50">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => {
+                                  handleUpdateStatus(task);
+                                  e.stopPropagation();
+                                }}
+                                className={`block text-center text-blue-600 w-full text-left px-4 py-2 ${
+                                  active ? "bg-gray-100" : ""
+                                }`}
+                              >
+                                <Edit2 size={18} />
+                              </button>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => {
+                                  handleDelete(task.id);
+                                  e.stopPropagation();
+                                }}
+                                className={`block w-full text-red-600 text-left px-4 py-2 ${
+                                  active ? "bg-gray-100" : ""
+                                }`}
+                              >
+                                <Trash size={18} />
+                              </button>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => {
+                                  setShowDetailedModalMobile(true);
+                                  e.stopPropagation();
+                                  setDetailedTask(task);
+                                }}
+                                className={`block text-green-600  block lg:hidden w-full text-left px-4 py-2 ${
+                                  active ? "bg-gray-100" : ""
+                                }`}
+                              >
+                                <Eye size={18} />
+                              </button>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Menu>
+                    </div>
+                    <h3 className="text-2xl mb-7 font-semibold">
                       {task.title.slice(0, 30)}
                     </h3>
-                    {/* <p className="text-gray-600 mb-2">{task.description}</p> */}
-                    <div className="mb-2">
-                      <span className="font-semibold">Status: </span>
-                      <span
-                        className={`px-2 py-1 rounded ${
-                          task.status_name === "Completed"
-                            ? "bg-green-100 text-green-800"
-                            : task.status_name === "In Progress"
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-gray-100 text-gray-800"
-                        }`}
-                      >
-                        {task.status_name || task.status}
-                      </span>
+                    <p className="text-gray-600 mb-7">
+                      {task.description.slice(0, 100)}
+                    </p>
+
+                    <div className="flex text-sm items-center flex-col lg:flex-row gap-2 justyfy-center">
+                      <div className="mb-2">
+                        <span className="font-semibold">Status:</span>
+                        <span
+                          className={`px-2 py-1 rounded ${
+                            task.status_name === "Completed"
+                              ? "text-green-800"
+                              : task.status_name === "In Progress"
+                                ? " text-yellow-400"
+                                : " text-red-500"
+                          }`}
+                        >
+                          {task.status_name || task.status}
+                        </span>
+                      </div>
+
+                      <div className="mb-2">
+                        <span className="font-semibold">Priority: </span>
+                        <span
+                          className={`
+                        ${
+                          task.priority_name == "Extreme"
+                            ? "text-red-500"
+                            : task.priority_name == "High"
+                              ? "text-yellow-500"
+                              : task.priority_name == "Medium"
+                                ? "text-blue-500"
+                                : "text-black"
+                        }
+                          `}
+                        >
+                          {task.priority_name || task.priority}
+                        </span>
+                      </div>
+
+                      <small className="block text-gray-500 mb-1">
+                        Due: {task.date}
+                      </small>
                     </div>
-                    <div className="mb-2">
-                      <span className="font-semibold">Priority: </span>
-                      <span>{task.priority_name || task.priority}</span>
-                    </div>
-                    <small className="block text-gray-500 mb-4">
-                      Due: {task.date}
-                    </small>
-                    <div className="flex gap-2">
+                    {/* <div className="flex gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -141,7 +242,7 @@ function Tasks() {
                       >
                         <Eye size={18} />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
             </div>

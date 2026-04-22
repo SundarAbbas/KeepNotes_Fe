@@ -9,10 +9,7 @@ import {
 import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import { IsAuthenticated } from "./Services/authService";
-import Status from "./Pages/Status";
-import AddStatus from "./Pages/AddStatus";
-import Priority from "./Pages/Priority";
-import AddPriority from "./Pages/AddPriority";
+import Categories from "./Pages/Categories";
 import AddTask from "./Pages/AddTask";
 import SignUp from "./Pages/SignUp";
 import Tasks from "./Pages/Tasks";
@@ -43,34 +40,13 @@ function App() {
           path="/statuses"
           element={
             <PrivateRoutes>
-              <Status />
+              <Categories />
             </PrivateRoutes>
           }
         />
-        <Route
-          path="/addStatus"
-          element={
-            <PrivateRoutes>
-              <AddStatus />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/priorities"
-          element={
-            <PrivateRoutes>
-              <Priority />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/addPriority"
-          element={
-            <PrivateRoutes>
-              <AddPriority />
-            </PrivateRoutes>
-          }
-        />
+      
+     
+       
         <Route
           path="/addTasks"
           element={

@@ -6,10 +6,11 @@ import {
   Plus,
   icons,
   LogOut,
-  Info,
   Flag,
-  Star,
   ListTodo,
+  Settings,
+  HelpCircle,
+  List,
 } from "lucide-react";
 import { logout } from "../Services/authService";
 import { useNavigate } from "react-router-dom";
@@ -39,11 +40,9 @@ const Sidebar = ({ children }) => {
   const navItems = [
     { name: "Dashboard", path: "/", icon: Home },
     { name: "My Tasks", path: "/tasks", icon: ListTodo },
-    // { name: "Add Tasks", path: "/addTasks", icon: Plus },
-    { name: "Categories", path: "/statuses", icon: Info },
-    // { name: "Add Status", path: "/addStatus", icon: Plus },
-    { name: "Priorites", path: "/priorities", icon: Star },
-    // { name: "Add Priority", path: "/addPriority", icon: Plus },
+    { name: "Categories", path: "/statuses", icon: List },
+    { name: "Settings", path: "/settings", icon: Settings },
+    { name: "Help", path: "/help", icon: HelpCircle },
   ];
   return (
     <div className="flex h-screen overflow-hidden bg-gray-700">

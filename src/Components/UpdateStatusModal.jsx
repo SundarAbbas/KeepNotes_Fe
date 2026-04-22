@@ -9,13 +9,11 @@ function UpdateStatusModal({ task, onClose, onUpdate }) {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
-    // Fetch available statuses from your API
       fetchStatuses();
   }, []);
 
   const fetchStatuses = async () => {
     try {
-      // Assuming you have a status endpoint
         const response = await getStatuses();
       setStatuses(response.data);
     } catch (error) {
