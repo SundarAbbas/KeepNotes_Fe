@@ -105,17 +105,17 @@ const Categories = () => {
 
         {/* Status */}
         <div className="mb-10">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-start items-center">
             <div className=" text-black font-bold text-lg border-b-2 border-blue-500">
               Task Status
             </div>
-            <button
+            {/* <button
               onClick={() => setIsModalOpen(true)}
               className="flex gap-2 items-center "
             >
               <Plus className="text-blue-500 " size={20} />
               <span className="text-gray-400">Add Task Status</span>
-            </button>
+            </button> */}
             <AddStatusModal
               isOpen={isModalOpen}
               onClose={handleCloseModal}
@@ -129,17 +129,17 @@ const Categories = () => {
             <table className="w-full table ">
               <thead className="border-b border-gray-300">
                 <tr className="divide-x divide-gray-400">
-                  <th className="p-3">SN</th>
+                  {/* <th className="p-3">SN</th> */}
                   <th className="p-3">Title</th>
-                  <th className="p-3">Actions</th>
+                  {/* <th className="p-3">Actions</th> */}
                 </tr>
               </thead>
               <tbody className="">
                 {status.map((st) => (
                   <tr key={st.id} className="divide-x divide-gray-400">
-                    <td className="p-3 ">{st.id}</td>
+                    {/* <td className="p-3 ">{st.id}</td> */}
                     <td className="p-3">{st.name}</td>
-                    <td className="p-3 flex items-center justify-center gap-2   ">
+                    {/* <td className="p-3 flex items-center justify-center gap-2   ">
                       <span
                         onClick={() => handleEdit(st)}
                         className="rounded-xl text-white text-sm bg-blue-400 px-4 py-2  "
@@ -155,7 +155,7 @@ const Categories = () => {
                         <Trash className="inline " size={15} />
                         Delete
                       </span>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
@@ -165,17 +165,17 @@ const Categories = () => {
 
         {/* Priority */}
         <div className="">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-start items-center">
             <div className=" text-black font-bold text-lg border-b-2 border-blue-500">
               Task Priority
             </div>
-            <button
+            {/* <button
               onClick={() => setIsPriorityModalOpen(true)}
               className="flex gap-2 items-center "
             >
               <Plus className="text-blue-500 " size={20} />
               <span className="text-gray-400">Add Task Priority</span>
-            </button>
+            </button> */}
             <AddPriorityModal
               isOpen={isPriorityModalOpen}
               onClose={handleClosePriorityModal}
@@ -188,17 +188,17 @@ const Categories = () => {
             <table className="w-full table ">
               <thead className="border-b border-gray-300">
                 <tr className="divide-x divide-gray-400">
-                  <th className="p-3">SN</th>
+                  {/* <th className="p-3">SN</th> */}
                   <th className="p-3">Title</th>
-                  <th className="p-3">Actions</th>
+                  {/* <th className="p-3">Actions</th> */}
                 </tr>
               </thead>
               <tbody className="">
                 {priorities.map((pr) => (
                   <tr className="divide-x divide-gray-400">
-                    <td className="p-3 ">{pr.id}</td>
+                    {/* <td className="p-3 ">{pr.id}</td> */}
                     <td className="p-3">{pr.name}</td>
-                    <td className="p-3 flex items-center justify-center gap-2   ">
+                    {/* <td className="p-3 flex items-center justify-center gap-2   ">
                       <span
                         onClick={() => handlePriorityEdit(pr)}
                         className="rounded-xl  text-sm text-white bg-blue-400 px-4 py-2  "
@@ -214,7 +214,7 @@ const Categories = () => {
                         <Trash className="inline " size={15} />
                         Delete
                       </span>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

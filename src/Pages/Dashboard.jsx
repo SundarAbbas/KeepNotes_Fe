@@ -105,7 +105,7 @@ function Dashboard() {
         />
       )}
 
-      <div className=" p-5 flex justify-center flex-col lg:flex-row  gap-10">
+      <div className="border-gray-400 border m-5 p-5 flex justify-center flex-col lg:flex-row  gap-10">
         <div className="flex flex-col gap-4  w-full   lg:w-1/2">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
