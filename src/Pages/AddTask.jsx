@@ -13,7 +13,7 @@ const AddTask = () => {
   useEffect(() => {
     loadPriorities();
     loadStatuses();
-  },[]);
+  }, []);
 
   const loadPriorities = async () => {
     try {
@@ -59,65 +59,78 @@ const AddTask = () => {
 
   return (
     <Sidebar>
-      <div className="text-4xl text-black font-bold mb-10">Add Task</div>
-      <form onSubmit={handleCreate} className="flex flex-col w-[40%]">
-        <input
-          type="text"
-          placeholder="Task title"
-          value={newTask.title}
-          className="w-[20vw] appearance-none mb-4 focus:ring-1 py-2 px-4 border border-gray-700"
-          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          className="w-[20vw] appearance-none mb-4 focus:ring-1 py-2 px-4 border border-gray-700"
-          value={newTask.description}
-          onChange={(e) =>
-            setNewTask({ ...newTask, description: e.target.value })
-          }
-        />
-        <div>
+      <div className=" flex justify-center items-center flex-col min-h-screen">
+        {/* <div className="text-4xl text-black font-bold  mb-10">Add Task</div> */}
+        <div className="mb-7 text-center">
+          <div className="text-slate-800 text-4xl font-extrabold tracking-tight">
+            Add <span className="text-blue-600">Tasks</span>
+          </div>
+          <span className="text-gray-400 mt-2">
+            Create Your Tasks And Start Development
+          </span>
+        </div>
+        <form
+          onSubmit={handleCreate}
+          className="bg-white border border-slate-200  shadow-xl shadow-blue-100/50 w-full max-w-md rounded-2xl p-8"
+        >
+          <input
+            type="text"
+            placeholder="Task title"
+            value={newTask.title}
+            className=" mb-2  shadow appearance-none border border-slate-300  rounded-xl w-full py-3 px-4 leading-tight outline-none transition-all focus:ring-2 focus:border-transparent focus:ring-blue-500 text-slate-700"
+            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            className=" mb-2  shadow appearance-none border border-slate-300  rounded-xl w-full py-3 px-4 leading-tight outline-none transition-all focus:ring-2 focus:border-transparent focus:ring-blue-500 text-slate-700"
+            value={newTask.description}
+            onChange={(e) =>
+              setNewTask({ ...newTask, description: e.target.value })
+            }
+          />
           <input
             type="date"
-            className="w-[20vw] appearance-none mb-4 focus:ring-1 py-2 px-4 border border-gray-700"
+            className="mb-2  shadow appearance-none border border-slate-300  rounded-xl w-full py-3 px-4 leading-tight outline-none transition-all focus:ring-2 focus:border-transparent focus:ring-blue-500 text-slate-700"
             value={newTask.date}
             onChange={(e) => setNewTask({ ...newTask, date: e.target.value })}
             required
           />
-        </div>
-        <div>
           <select
             value={newTask.priority}
-            className="w-[20vw] appearance-none mb-4 focus:ring-1 py-2 px-4 border border-gray-700"
+            className=" mb-2  shadow appearance-none border border-slate-300  rounded-xl w-full py-3 px-4 leading-tight outline-none transition-all focus:ring-2 focus:border-transparent focus:ring-blue-500 text-slate-700"
             onChange={(e) =>
               setNewTask({ ...newTask, priority: e.target.value })
             }
           >
             {priorities.map((p) => (
-              <option value={p.id} key={p.id}>{p.name}</option>
+              <option value={p.id} key={p.id}>
+                {p.name}
+              </option>
             ))}
           </select>
-        </div>
-        <div>
           <select
             value={newTask.status}
-            className="w-[20vw] appearance-none mb-4 focus:ring-1 py-2 px-4 border border-gray-700"
-            onChange={(e) =>
-              setNewTask({ ...newTask, status: e.target.value })
-            }
+            className=" mb-2  shadow appearance-none border border-slate-300  rounded-xl w-full py-3 px-4 leading-tight outline-none transition-all focus:ring-2 focus:border-transparent focus:ring-blue-500 text-slate-700"
+            onChange={(e) => setNewTask({ ...newTask, status: e.target.value })}
           >
             {statuses.map((s) => (
-              <option value={s.id} key={s.id}>{s.name}</option>
+              <option value={s.id} key={s.id}>
+                {s.name}
+              </option>
             ))}
           </select>
-        </div>
-        <button className=" text-blue-700" type="submit">
-          {" "}
-          <Save size={30} />{" "}
-        </button>
-      </form>
+          <button
+            className="w-full py-3 rounded-xl text-lg font-bold bg-blue-500 mt-6 hover:bg-blue-600 text-white transitona-all shadow-;g activate-scale-[0.98] "
+            type="submit"
+          >
+            {" "}
+            {/* <Save size={30} />{" "} */}
+            Save
+          </button>
+        </form>
+      </div>
     </Sidebar>
   );
 };

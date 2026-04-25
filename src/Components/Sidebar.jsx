@@ -99,7 +99,7 @@ const Sidebar = ({ children }) => {
           </button>
         </header>
 
-        <main className="p-6  overflow-y-auto">{children}</main>
+        <main className=" overflow-y-auto">{children}</main>
       </div>
     </div>
   );

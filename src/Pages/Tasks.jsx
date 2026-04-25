@@ -69,7 +69,7 @@ function Tasks() {
   return (
     <>
       <Sidebar>
-        <div className="dashboard">
+        <div className="dashboard p-6 ">
           <div className="flex flex-wrap items-start justify-start gap-10">
             <div className="flex flex-wrap items-center border-1 rounded-xl border-gray-400 p-6 justify-center gap-5 w-[100%] lg:w-[50%]">
               <div className="w-full flex items-center justify-between">

@@ -13,6 +13,8 @@ import Categories from "./Pages/Categories";
 import AddTask from "./Pages/AddTask";
 import SignUp from "./Pages/SignUp";
 import Tasks from "./Pages/Tasks";
+import Settings from "./Pages/Settings";
+import Help from "./Pages/Help";
 
 function PrivateRoutes({ children }) {
   const authenticated = IsAuthenticated();
@@ -44,14 +46,28 @@ function App() {
             </PrivateRoutes>
           }
         />
-      
-     
-       
+
         <Route
           path="/addTasks"
           element={
             <PrivateRoutes>
               <AddTask />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoutes>
+              <Settings />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/help"
+          element={
+            <PrivateRoutes>
+              <Help />
             </PrivateRoutes>
           }
         />
